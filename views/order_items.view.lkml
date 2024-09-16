@@ -62,6 +62,39 @@ view: order_items {
     sql: ${sale_price} ;;  }
   measure: count {
     type: count
+    html:
+    <div style="float: left
+    ; width:{{ value | times:100}}%
+
+    ; background-color:
+    {% if value > 90 %}
+rgba(0,180,0,{{ value | times:100 }})
+{% elsif value < 90 %}
+rgba(180,0,0,{{ value | times:100 }})
+{% else %}
+rgba(0,200,0,{{ value | times:100 }})
+{% endif %}
+    ; text-align:left
+    ; color: #FFFFFF
+    ; border-radius: 5px"> <p style="margin-bottom: 0; margin-left: 4px;">{{ value | times:100 }}%</p>
+    </div>
+    <div style="float: left
+    ; width:{{ 1| minus:value | times:100}}%
+
+    ; background-color:
+    {% if value > 90 %}
+rgba(0,180,0,{{ value | times:100 }})
+{% elsif value < 90 %}
+rgba(180,0,0,{{ value | times:100 }})
+{% else %}
+rgba(0,200,0,{{ value | times:100 }})
+{% endif %}
+
+    ; text-align:right
+    ; border-radius: 5px"> <p style="margin-bottom: 0; margin-left: 0px; color:rgba(0,0,0,0.0" )>{{value}}</p>
+    </div>
+    ;;
+
     drill_fields: [id, orders.id, inventory_items.id]
   }
 }
